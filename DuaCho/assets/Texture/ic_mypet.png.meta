@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "19747f20-7a67-459b-befd-849ef22c762c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "ic_mypet": {
+      "ver": "1.0.4",
+      "uuid": "36e656de-fc5e-45c7-8e02-f06e83c39b49",
+      "rawTextureUuid": "19747f20-7a67-459b-befd-849ef22c762c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1,
+      "offsetY": 3,
+      "trimX": 15,
+      "trimY": 13,
+      "width": 177,
+      "height": 54,
+      "rawWidth": 209,
+      "rawHeight": 86,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
