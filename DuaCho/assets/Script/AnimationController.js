@@ -14,17 +14,39 @@ cc.Class({
     properties: {
         animationNode: cc.Animation,
         clipName: "dog_run",
+        rankLabel: cc.Label,
+        ranking: '',
+        deltaDistance: 0, // bu tru khoang cach vi goc nhin 3D
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     start() {
-
-    },
-
-    onLoad() {
-        this.animationNode.play(this.clipName);
+        this.rankLabel.string = '';
     },
 
     // update (dt) {},
+
+    init: function(data) {
+        this.animationNode = data.animationNode;
+        this.clipName = data.clipName;
+        this.ranking = data.ranking;
+    },
+
+    updateRank(value) {
+        this.ranking = value;
+        this.rankLabel.string = "Rank " + this.ranking;
+    },
+
+    play() {
+        this.scheduleOnce(function() {
+            this.animationNode.play(this.clipName);
+        }, 0.08 * Number(this.ranking));
+        this.animationNode.play(this.clipName);
+        this.rankLabel.string = "Rank " + this.ranking;
+    },
+
+    stop() {
+        this.animationNode.stop();
+    },
 });

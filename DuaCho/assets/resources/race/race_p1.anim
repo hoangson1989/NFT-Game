@@ -1,0 +1,31 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "race_p1",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 15.125,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": "2",
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            0,
+            0.5
+          ]
+        },
+        {
+          "frame": 15.125,
+          "value": [
+            -3370,
+            0.5
+          ]
+        }
+      ]
+    }
+  },
+  "events": []
+}

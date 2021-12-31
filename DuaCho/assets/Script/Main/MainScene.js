@@ -4,6 +4,8 @@ cc.Class({
     properties: {
         loginView: cc.Node,
         mainView: cc.Node,
+        accountInfoView: cc.Node,
+
         // these are child of Main View
         lobbyView: cc.Node,
         shopView: cc.Node,
@@ -47,6 +49,7 @@ cc.Class({
         }
 
         this.selectedBtn = null;
+        this.selectedTabView = null;
     },
 
     onLoad() {
@@ -59,6 +62,10 @@ cc.Class({
 
     // Thay đổi Tab
     showShopView() {
+        this.accountInfoView.active = true;
+        if (this.selectedTabView != null) {
+            this.selectedTabView.active = false;
+        }
         this.lobbyView.active = false;
         this.shopView.active = true;
 
@@ -66,32 +73,57 @@ cc.Class({
             this.selectedBtn.interactable = true;
         }
         this.btnShop.interactable = false;
-        this.selectedBtn = this.btnShop;
 
+        this.selectedBtn = this.btnShop;
+        this.selectedTabView = this.shopView;
         //update ui cho shop view
 
     },
 
     showMyPetView() {
+        this.accountInfoView.active = true;
+        if (this.selectedTabView != null) {
+            this.selectedTabView.active = false;
+        }
+        this.lobbyView.active = false;
         if (this.selectedBtn != null) {
             this.selectedBtn.interactable = true;
         }
+
+        this.myFarmView.active = true;
+        this.selectedTabView = this.myFarmView;
         this.btnMyFarm.interactable = false;
         this.selectedBtn = this.btnMyFarm;
     },
 
     showMarketView() {
+        this.accountInfoView.active = true;
+        if (this.selectedTabView != null) {
+            this.selectedTabView.active = false;
+        }
+        this.lobbyView.active = false;
         if (this.selectedBtn != null) {
             this.selectedBtn.interactable = true;
         }
+
+        this.marketView.active = true;
+        this.selectedTabView = this.marketView;
         this.btnMarket.interactable = false;
         this.selectedBtn = this.btnMarket;
     },
 
     showBattleView() {
+        this.accountInfoView.active = false;
+        if (this.selectedTabView != null) {
+            this.selectedTabView.active = false;
+        }
+        this.lobbyView.active = false;
         if (this.selectedBtn != null) {
             this.selectedBtn.interactable = true;
         }
+
+        this.battleView.active = true;
+        this.selectedTabView = this.battleView;
         this.btnBattle.interactable = false;
         this.selectedBtn = this.btnBattle;
     },
