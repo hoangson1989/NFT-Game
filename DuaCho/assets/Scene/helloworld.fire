@@ -44,8 +44,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.5140569133280326,
-      "y": 0.5140569133280326,
+      "x": 1,
+      "y": 1,
       "z": 1
     },
     "_quat": {
@@ -102554,10 +102554,10 @@
     "popupLabel": {
       "__id__": 2205
     },
-    "adminAddress": "0x00b3b4982ec9ecc9bb49305af1dc50c4dc693046",
-    "contractAddress": "0xcd1740512213c0316C5a99FaeB18580FbdF1F048",
+    "adminAddress": "0x3C0A4C2fd3BD5711Ff868568E0760AB9c265E110",
+    "contractAddress": "0x820187FB9b9309Fc3178edA473B9eFa65F2EbDFB",
     "contractABI": {
-      "__uuid__": "fecf3853-0b35-4e9b-9471-8ce89c2c040c"
+      "__uuid__": "88fd6b80-68c3-4ca4-afce-b0dd32bee101"
     },
     "_id": "bbELVSt9tJ64TzT988GOrZ"
   },
