@@ -37,7 +37,6 @@ cc.Class({
             this.lblSilverFee.string = 'unvailable';
         }
 
-        this.isOpenBox = false;
         this.boxType = null;
     },
 
@@ -61,14 +60,11 @@ cc.Class({
                 cc.PopupController.getInstance().showPopup('Please deposit more Token');
                 cc.PopupController.getInstance().hidePopupAfterDelay(2);
             } else {
-                if (this.isOpenBox == false) {
-                    this.isOpenBox = true;
-                    //
-                    var params = JSON.stringify({
-                        address: cc.AccountController.getInstance().getMetamaskAddress(),
-                    });
-                    cc.APIController.getInstance().openSilverBox(params, this)
-                }
+                //
+                var params = JSON.stringify({
+                    address: cc.AccountController.getInstance().getMetamaskAddress(),
+                });
+                cc.APIController.getInstance().openSilverBox(params, this)
             }
         }
     },
