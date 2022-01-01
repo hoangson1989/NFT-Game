@@ -63,6 +63,21 @@
             });
         };
 
+        APIController.prototype.getItems = function(params, controller) {
+            var url = 'user/get_items';
+
+            return cc.ServerConnector.getInstance().sendRequest(url, params, function(response) {
+                var obj = JSON.parse(response);
+
+                if (obj.status_code != undefined && obj.status_code != 200) {
+                    return controller.onGetItemsFail(obj);
+                } else {
+                    return controller.onGetItemsSuccess(obj);
+                }
+
+            });
+        };
+
         APIController.prototype.deposit = function(params, controller) {
             var url = 'user/deposit';
 

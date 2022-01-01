@@ -37,6 +37,21 @@
             this._battleDuration = value;
         };
 
+        GameController.prototype.getMainView = function() {
+            return this._mainView;
+        };
+
+        GameController.prototype.setMainView = function(value) {
+            this._mainView = value;
+        };
+
+        GameController.prototype.backToLobby = function() {
+            this._mainView.showLobbyView();
+        };
+
+        GameController.prototype.showBattleView = function() {
+            this._mainView.showBattleView();
+        };
 
         return GameController;
 

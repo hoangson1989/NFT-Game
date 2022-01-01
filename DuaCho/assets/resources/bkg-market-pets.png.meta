@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "7af6f71c-1b2d-4ab9-95c5-460f628ac7a2",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "bkg-market-pets": {
+      "ver": "1.0.4",
+      "uuid": "8328565b-5b82-4d98-af37-654550ae703e",
+      "rawTextureUuid": "7af6f71c-1b2d-4ab9-95c5-460f628ac7a2",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 300,
+      "height": 513,
+      "rawWidth": 300,
+      "rawHeight": 513,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -24,6 +24,8 @@ cc.Class({
 
         petGroupView: cc.Node,
         petTemplates: [cc.Node],
+
+        battleResultView: cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -39,6 +41,8 @@ cc.Class({
     },
 
     onEnable() {
+        this.battleResultView.active = false;
+        this.raceView.active = true;
         // load AnimationClip
         var self = this;
         cc.loader.loadRes("pet/1/dog1_run", function(err, clip) {
@@ -85,6 +89,35 @@ cc.Class({
         }
     },
 
+    //Menu
+    playGameAgain() {
+        this.raceView.active = true;
+        this.battleResultView.active = false;
+        this.stopRaceAnimation(true);
+        // load AnimationClip
+        var self = this;
+        cc.loader.loadRes("pet/1/dog1_run", function(err, clip) {
+            self.setupGameplay(clip);
+        });
+
+        cc.PopupController.getInstance().showPopup("Starting in 3...");
+        this.scheduleOnce(function() {
+            cc.PopupController.getInstance().showPopup("Starting in 2...");
+            this.scheduleOnce(function() {
+                cc.PopupController.getInstance().showPopup("Starting in 1...");
+                this.scheduleOnce(function() {
+                    cc.PopupController.getInstance().hidePopup();
+                    this.playGame();
+                }, 1);
+            }, 1);
+        }, 1);
+    },
+
+    closeRace() {
+        this.battleResultView.active = false;
+        this.stopRaceAnimation(true);
+        cc.GameController.getInstance().backToLobby();
+    },
 
     //Gameplay
     changeRanking() {
@@ -112,6 +145,10 @@ cc.Class({
                 petItem.mSpeed = speed; // per seconds, value > or < 0
                 petItem.mTargetX = petItem.getPosition().x + totalDistance;
             }
+            //
+            this.scheduleOnce(function() {
+                this.changeRanking();
+            }, 3);
         }
     },
 
@@ -121,12 +158,19 @@ cc.Class({
 
         this.scheduleOnce(function() {
             this.changeRanking();
-        }, 5);
+        }, 3);
+
+        this.scheduleOnce(function() {
+            this.stopGame();
+
+        }, 30);
     },
 
     stopGame() {
         this.isPlaying = false;
-        this.stopRaceAnimation();
+        this.stopRaceAnimation(false);
+        //
+        this.battleResultView.active = true;
     },
 
     setupGameplay(clip) {
@@ -136,7 +180,7 @@ cc.Class({
         //  
         let randomRank = Math.floor(Math.random() * 10) % 5;
         var self = this;
-        for (var i = 0; i < this.numberOfPets; ++i) {
+        for (var i = 0; i < this.numberOfPets; i++) {
             let petItem = cc.instantiate(self.petTemplates[i]);
             let anim = petItem.getComponent(cc.Animation);
 
@@ -156,10 +200,12 @@ cc.Class({
                 clipName: clip.name,
                 ranking: '' + petItem.mRank,
             });
-            if (i == 1 || i == 3) {
+            if (i == 3) {
                 self.petGroupView.addChild(petItem, 0);
+            } else if (i == 1) {
+                self.petGroupView.addChild(petItem, 1);
             } else {
-                self.petGroupView.addChild(petItem);
+                self.petGroupView.addChild(petItem, 2);
             }
 
             // tinh speed
@@ -206,62 +252,86 @@ cc.Class({
         }
     },
 
-    stopRaceAnimation() {
+    stopRaceAnimation(isReset) {
         let racePart0Anim = this.racePart0Node.getComponent(cc.Animation);
         racePart0Anim.stop();
-        var pos = this.racePart0Node.getPosition();
-        pos.x = 0;
-        this.racePart0Node.setPosition(pos);
 
         let racePart00Anim = this.racePart00Node.getComponent(cc.Animation);
         racePart00Anim.stop();
-        pos = this.racePart00Node.getPosition();
-        pos.x = 0;
-        this.racePart00Node.setPosition(pos);
+
 
         let racePart1Anim = this.racePart1Node.getComponent(cc.Animation);
         racePart1Anim.stop();
-        pos = this.racePart1Node.getPosition();
-        pos.x = 0;
-        this.racePart1Node.setPosition(pos);
+
 
         let racePart2Anim = this.racePart2Node.getComponent(cc.Animation);
         racePart2Anim.stop();
-        pos = this.racePart2Node.getPosition();
-        pos.x = 0;
-        this.racePart2Node.setPosition(pos);
+
 
         let racePart3Anim = this.racePart3Node.getComponent(cc.Animation);
         racePart3Anim.stop();
-        pos = this.racePart3Node.getPosition();
-        pos.x = 0;
-        this.racePart3Node.setPosition(pos);
+
 
         let racePart4Anim = this.racePart4Node.getComponent(cc.Animation);
         racePart4Anim.stop();
-        pos = this.racePart4Node.getPosition();
-        pos.x = 0;
-        this.racePart4Node.setPosition(pos);
+
 
         let racePart5Anim = this.racePart5Node.getComponent(cc.Animation);
         racePart5Anim.stop();
-        pos = this.racePart5Node.getPosition();
-        pos.x = 0;
-        this.racePart5Node.setPosition(pos);
+
 
         let raceStartAnim = this.raceStartNode.getComponent(cc.Animation);
         raceStartAnim.stop();
 
-        pos = this.raceStartNode.getPosition();
-        pos.x = 0;
-        this.raceStartNode.setPosition(pos);
 
         for (var i = 0; i < this.petGroupView.children.length; ++i) {
             let petItem = this.petGroupView.children[i];
-            petItem.setPosition(petItem.mOriginPos);
+            if (isReset == true) {
+                petItem.setPosition(petItem.mOriginPos);
+            }
+            //
             let controller = petItem.getComponent('AnimationController');
             controller.stop();
         }
-        this.petGroupView.removeAllChildren(true);
+
+        if (isReset == true) {
+            this.petGroupView.removeAllChildren(true);
+
+            var pos = this.racePart0Node.getPosition();
+            pos.x = 0;
+            this.racePart0Node.setPosition(pos);
+            //
+            pos = this.racePart00Node.getPosition();
+            pos.x = 0;
+            this.racePart00Node.setPosition(pos);
+            //
+            pos = this.racePart1Node.getPosition();
+            pos.x = 0;
+            this.racePart1Node.setPosition(pos);
+            //
+            pos = this.racePart2Node.getPosition();
+            pos.x = 0;
+            this.racePart2Node.setPosition(pos);
+            //
+            pos = this.racePart2Node.getPosition();
+            pos.x = 0;
+            this.racePart2Node.setPosition(pos);
+            //
+            pos = this.racePart3Node.getPosition();
+            pos.x = 0;
+            this.racePart3Node.setPosition(pos);
+            //
+            pos = this.racePart4Node.getPosition();
+            pos.x = 0;
+            this.racePart4Node.setPosition(pos);
+            //
+            pos = this.racePart5Node.getPosition();
+            pos.x = 0;
+            this.racePart5Node.setPosition(pos);
+
+            pos = this.raceStartNode.getPosition();
+            pos.x = 0;
+            this.raceStartNode.setPosition(pos);
+        }
     },
 });

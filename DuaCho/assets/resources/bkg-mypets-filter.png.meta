@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "698b44f8-1414-48fc-8f1b-1b263308c0e2",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "bkg-mypets-filter": {
+      "ver": "1.0.4",
+      "uuid": "69324a7c-290d-4454-8ad7-32b38e467a37",
+      "rawTextureUuid": "698b44f8-1414-48fc-8f1b-1b263308c0e2",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 750,
+      "height": 84,
+      "rawWidth": 750,
+      "rawHeight": 84,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

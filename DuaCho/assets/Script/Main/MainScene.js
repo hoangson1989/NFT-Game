@@ -34,6 +34,8 @@ cc.Class({
     start() {
         this.lobbyView.active = true;
         //
+        cc.GameController.getInstance().setMainView(this);
+        //
         cc.PopupController.getInstance().setLabel(this.popupLabel);
         cc.PopupController.getInstance().setPopup(this.popupView);
         cc.PopupController.getInstance().setController(this);
@@ -58,6 +60,20 @@ cc.Class({
 
     update(dt) {
 
+    },
+
+    //show Lobby 
+    showLobbyView() {
+        this.lobbyView.active = true;
+        this.accountInfoView.active = true;
+        if (this.selectedTabView != null) {
+            this.selectedTabView.active = false;
+            this.selectedTabView = null;
+        }
+        if (this.selectedBtn != null) {
+            this.selectedBtn.interactable = true;
+            this.selectedBtn = null;
+        }
     },
 
     // Thay đổi Tab

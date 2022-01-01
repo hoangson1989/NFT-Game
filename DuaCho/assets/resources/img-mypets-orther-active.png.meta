@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "8aad0b1c-57b5-4510-9038-72f704d16169",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "img-mypets-orther-active": {
+      "ver": "1.0.4",
+      "uuid": "d26ec747-4b25-4a5d-a63b-f231915475f6",
+      "rawTextureUuid": "8aad0b1c-57b5-4510-9038-72f704d16169",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 142,
+      "height": 52,
+      "rawWidth": 142,
+      "rawHeight": 52,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
