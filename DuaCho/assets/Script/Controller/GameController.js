@@ -53,6 +53,14 @@
             this._mainView.showBattleView();
         };
 
+        GameController.prototype.getPetToRace = function() {
+            return this._petToRace;
+        };
+
+        GameController.prototype.setPetToRace = function(value) {
+            this._petToRace = value;
+        };
+
         return GameController;
 
     })();

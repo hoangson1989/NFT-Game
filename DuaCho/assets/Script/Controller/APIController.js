@@ -48,6 +48,21 @@
             });
         };
 
+        APIController.prototype.startRace = function(params, id, controller) {
+            var url = 'battle_field/race/' + id;
+
+            return cc.ServerConnector.getInstance().sendRequestPOST(url, params, function(response) {
+                var obj = JSON.parse(response);
+
+                if (obj.status_code != undefined && obj.status_code != 200) {
+                    return controller.onStartRaceFail(obj);
+                } else {
+                    return controller.onStartRaceSuccess(obj);
+                }
+
+            });
+        };
+
         APIController.prototype.getConfig = function(params, controller) {
             var url = 'get_config';
 

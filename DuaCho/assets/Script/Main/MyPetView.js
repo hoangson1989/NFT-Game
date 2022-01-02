@@ -194,6 +194,9 @@ cc.Class({
                     let lblID = petItemNode.children[0].children[1].children[0].children[0].getComponent(cc.Label);
 
                     if (dataItem.id != undefined) {
+                        let myPetItemScript = petItemNode.getComponent('MyPetItem');
+                        myPetItemScript.petData = dataItem;
+
                         const address = dataItem.id;
                         const prefix = address.substring(0, 4);
                         const subfix = address.substring(address.length - 6, address.length);

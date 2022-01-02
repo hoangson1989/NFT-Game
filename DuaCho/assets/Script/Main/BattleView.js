@@ -25,7 +25,7 @@ cc.Class({
         petGroupView: cc.Node,
         petTemplates: [cc.Node],
 
-        battleResultView: cc.Node,
+        raceAgainAlert: cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -41,25 +41,7 @@ cc.Class({
     },
 
     onEnable() {
-        this.battleResultView.active = false;
-        this.raceView.active = true;
-        // load AnimationClip
-        var self = this;
-        cc.loader.loadRes("pet/1/dog1_run", function(err, clip) {
-            self.setupGameplay(clip);
-        });
-
-        cc.PopupController.getInstance().showPopup("Starting in 3...");
-        this.scheduleOnce(function() {
-            cc.PopupController.getInstance().showPopup("Starting in 2...");
-            this.scheduleOnce(function() {
-                cc.PopupController.getInstance().showPopup("Starting in 1...");
-                this.scheduleOnce(function() {
-                    cc.PopupController.getInstance().hidePopup();
-                    this.playGame();
-                }, 1);
-            }, 1);
-        }, 1);
+        this.callStartRace();
     },
 
     onDisable() {
@@ -88,12 +70,24 @@ cc.Class({
             }
         }
     },
+    // API
+    callStartRace() {
+        cc.PopupController.getInstance().showPopup("Connecting to server...");
+        var params = JSON.stringify({
+            address: cc.AccountController.getInstance().getMetamaskAddress(),
+        });
+        let petData = cc.GameController.getInstance().getPetToRace();
+        cc.APIController.getInstance().startRace(params, petData.id, this);
+    },
 
-    //Menu
-    playGameAgain() {
+    onStartRaceSuccess(obj) {
+        console.log('start race thanh cong');
+        if (obj.user_ballance != undefined) {
+            cc.AccountController.getInstance().setBallance(obj.user_ballance);
+        }
+
         this.raceView.active = true;
-        this.battleResultView.active = false;
-        this.stopRaceAnimation(true);
+        this.raceAgainAlert.active = false;
         // load AnimationClip
         var self = this;
         cc.loader.loadRes("pet/1/dog1_run", function(err, clip) {
@@ -113,8 +107,29 @@ cc.Class({
         }, 1);
     },
 
+    onStartRaceFail(obj) {
+        console.log('start race that bat ' + obj);
+
+        if (error.message != undefined) {
+            cc.PopupController.getInstance().showPopup(error.message);
+        } else {
+            cc.PopupController.getInstance().showPopup('Cannot connect to server');
+        }
+        cc.PopupController.getInstance().hidePopupAfterDelay(3);
+
+        //
+        this.raceAgainAlert.active = true;
+    },
+
+    //RaceAgain Alert
+    playGameAgain() {
+        this.stopRaceAnimation(true);
+        this.callStartRace();
+    },
+
     closeRace() {
-        this.battleResultView.active = false;
+        cc.GameController.getInstance().setPetToRace(null);
+        this.raceAgainAlert.active = false;
         this.stopRaceAnimation(true);
         cc.GameController.getInstance().backToLobby();
     },
@@ -170,7 +185,7 @@ cc.Class({
         this.isPlaying = false;
         this.stopRaceAnimation(false);
         //
-        this.battleResultView.active = true;
+        this.raceAgainAlert.active = true;
     },
 
     setupGameplay(clip) {

@@ -37,7 +37,13 @@ cc.Class({
 
     // update (dt) {},
     goToBattle() {
-        cc.GameController.getInstance().showBattleView();
+        if (this.petData != undefined) {
+            cc.GameController.getInstance().setPetToRace(this.petData);
+            cc.GameController.getInstance().showBattleView();
+        } else {
+            console.log('PetNode dont have data');
+        }
+
     },
 
     goToMarket() {

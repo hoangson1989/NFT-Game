@@ -129,19 +129,26 @@ cc.Class({
     },
 
     showBattleView() {
-        this.accountInfoView.active = false;
-        if (this.selectedTabView != null) {
-            this.selectedTabView.active = false;
-        }
-        this.lobbyView.active = false;
-        if (this.selectedBtn != null) {
-            this.selectedBtn.interactable = true;
+        const petToRace = cc.GameController.getInstance().getPetToRace();
+        if (petToRace == undefined || petToRace == null) {
+            cc.PopupController.getInstance().showPopup("Please select Pet to race");
+            cc.PopupController.getInstance().hidePopupAfterDelay(2);
+        } else {
+            this.accountInfoView.active = false;
+            if (this.selectedTabView != null) {
+                this.selectedTabView.active = false;
+            }
+            this.lobbyView.active = false;
+            if (this.selectedBtn != null) {
+                this.selectedBtn.interactable = true;
+            }
+
+            this.battleView.active = true;
+            this.selectedTabView = this.battleView;
+            this.btnBattle.interactable = false;
+            this.selectedBtn = this.btnBattle;
         }
 
-        this.battleView.active = true;
-        this.selectedTabView = this.battleView;
-        this.btnBattle.interactable = false;
-        this.selectedBtn = this.btnBattle;
     },
 
     // Login Metamask
