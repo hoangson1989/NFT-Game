@@ -53,10 +53,10 @@ cc.Class({
     openBuyBox() {
         this.closeBuyBoxAlert();
         if (this.boxType == "silver") {
-            //check ballance
-            const ballance = cc.AccountController.getInstance().getBallance();
+            //check balance
+            const balance = cc.AccountController.getInstance().getBallance();
             const cost = cc.GameController.getInstance().getSilverBoxFee();
-            if (ballance < cost) {
+            if (balance < cost) {
                 cc.PopupController.getInstance().showPopup('Please deposit more Token');
                 cc.PopupController.getInstance().hidePopupAfterDelay(2);
             } else {
@@ -106,8 +106,8 @@ cc.Class({
             }
         }
 
-        if (obj.user_ballance != undefined) {
-            cc.AccountController.getInstance().setBallance(obj.user_ballance);
+        if (obj.user_balance != undefined) {
+            cc.AccountController.getInstance().setBallance(obj.user_balance);
         }
     },
 

@@ -85,8 +85,8 @@ cc.Class({
     onDepositSuccess(obj) {
         cc.PopupController.getInstance().hidePopup();
         this.toggleDepositTokenView();
-        if (obj.user_ballance != undefined) {
-            cc.AccountController.getInstance().setBallance(obj.user_ballance);
+        if (obj.user_balance != undefined) {
+            cc.AccountController.getInstance().setBallance(obj.user_balance);
         }
     },
 

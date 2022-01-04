@@ -190,7 +190,7 @@ cc.Class({
 
         cc.AccountController.getInstance().setMetamaskAddress(obj.eth_address);
         cc.AccountController.getInstance().setAccessToken(obj.access_token);
-        cc.AccountController.getInstance().setBallance(obj.ballance);
+        cc.AccountController.getInstance().setBallance(obj.balance);
 
         this.loginView.active = false;
         this.mainView.active = true;

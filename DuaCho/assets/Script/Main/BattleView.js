@@ -82,8 +82,8 @@ cc.Class({
 
     onStartRaceSuccess(obj) {
         console.log('start race thanh cong');
-        if (obj.user_ballance != undefined) {
-            cc.AccountController.getInstance().setBallance(obj.user_ballance);
+        if (obj.user_balance != undefined) {
+            cc.AccountController.getInstance().setBallance(obj.user_balance);
         }
 
         this.raceView.active = true;
