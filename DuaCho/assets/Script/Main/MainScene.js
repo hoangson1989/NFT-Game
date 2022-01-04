@@ -12,12 +12,14 @@ cc.Class({
         battleView: cc.Node,
         marketView: cc.Node,
         myFarmView: cc.Node,
+        combineView: cc.Node,
 
         //Tab Buttons
         btnShop: cc.Button,
         btnBattle: cc.Button,
         btnMarket: cc.Button,
         btnMyFarm: cc.Button,
+        btnCombine: cc.Button,
 
         //popup
         popupView: cc.Node,
@@ -126,6 +128,22 @@ cc.Class({
         this.selectedTabView = this.marketView;
         this.btnMarket.interactable = false;
         this.selectedBtn = this.btnMarket;
+    },
+
+    showCombineView() {
+        this.accountInfoView.active = true;
+        if (this.selectedTabView != null) {
+            this.selectedTabView.active = false;
+        }
+        this.lobbyView.active = false;
+        if (this.selectedBtn != null) {
+            this.selectedBtn.interactable = true;
+        }
+
+        this.combineView.active = true;
+        this.selectedTabView = this.combineView;
+        this.btnCombine.interactable = false;
+        this.selectedBtn = this.btnCombine;
     },
 
     showBattleView() {
